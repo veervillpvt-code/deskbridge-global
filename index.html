@@ -492,7 +492,7 @@ footer a:hover{color:var(--fg)}
       <div class="contact">
         <div>
           <h2 id="contact-h">Start your free 5-hour trial</h2>
-          <p>Fill in the form to write your request, then send it to us by email. We reply within one working day.</p>
+          <p>Tell us about the work you want to hand over. We reply within one working day.</p>
           <div class="mailline">
             <span style="font-size:13px;font-weight:700;letter-spacing:.06em;text-transform:uppercase;opacity:.85">Email us</span>
             <span class="addr" id="mail">deskbridgeglobal@gmail.com</span>
@@ -504,7 +504,10 @@ footer a:hover{color:var(--fg)}
             <div><label for="q-biz">Business</label><input id="q-biz" autocomplete="organization" placeholder="Smith Home Goods"></div>
           </div>
           <div class="two">
+            <div><label for="q-email">Email</label><input id="q-email" type="email" autocomplete="email" placeholder="jane@smithhomegoods.com"></div>
             <div><label for="q-country">Country</label><input id="q-country" autocomplete="country-name" placeholder="United Kingdom"></div>
+          </div>
+          <div>
             <div><label for="q-svc">Main service</label>
               <select id="q-svc">
                 <option>Data entry &amp; processing</option><option>Bookkeeping &amp; accounts</option><option>Invoices &amp; payroll prep</option><option>Customer support</option><option>E-commerce operations</option><option>Virtual assistant</option><option>Social media &amp; content</option><option>Lead generation</option><option>Website &amp; listing updates</option><option>Not sure yet</option>
@@ -512,7 +515,8 @@ footer a:hover{color:var(--fg)}
             </div>
           </div>
           <div><label for="q-work">What work do you want to hand over?</label><textarea id="q-work" placeholder="About 300 supplier invoices a month into Xero, plus replies to customer emails."></textarea></div>
-          <button class="btn btn-primary" type="submit">Write my request</button>
+          <input type="text" id="q-honey" tabindex="-1" autocomplete="off" aria-hidden="true" style="position:absolute;left:-9999px;width:1px;height:1px;opacity:0">
+          <button class="btn btn-primary" type="submit" id="sendBtn">Send my request</button>
           <span class="status" id="status" aria-live="polite"></span>
           <div class="preview" id="preview" hidden></div>
           <div class="two" id="sendRow" hidden>
@@ -589,11 +593,31 @@ footer a:hover{color:var(--fg)}
   function v(id){ return document.getElementById(id).value.trim(); }
   form.addEventListener('submit', function(e){
     e.preventDefault();
-    if (!v('q-name') || !v('q-work')){ out.textContent = 'Add your name and the work you want to hand over.'; return; }
-    var body = 'Hello DeskBridge,\n\nName: ' + v('q-name') + '\nBusiness: ' + (v('q-biz') || '-') + '\nCountry: ' + (v('q-country') || '-') + '\nService: ' + v('q-svc') + '\n\nWork:\n' + v('q-work') + '\n\nI would like the free 5-hour trial.';
-    pv.textContent = body; pv.hidden = false; row.hidden = false;
-    mailA.href = 'mailto:deskbridgeglobal@gmail.com?subject=' + encodeURIComponent('Free trial request - ' + (v('q-biz') || v('q-name'))) + '&body=' + encodeURIComponent(body);
-    out.textContent = 'Your request is ready. Copy it or open your email app, and send it to deskbridgeglobal@gmail.com.';
+    if (v('q-honey')) return;
+    var em = v('q-email');
+    if (!v('q-name') || !v('q-work') || !/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(em)){ out.textContent = 'Add your name, a valid email and the work you want to hand over.'; return; }
+    var body = 'Hello DeskBridge,\n\nName: ' + v('q-name') + '\nEmail: ' + em + '\nBusiness: ' + (v('q-biz') || '-') + '\nCountry: ' + (v('q-country') || '-') + '\nService: ' + v('q-svc') + '\n\nWork:\n' + v('q-work') + '\n\nI would like the free 5-hour trial.';
+    var subject = 'Free trial request - ' + (v('q-biz') || v('q-name'));
+    function fallback(){
+      pv.textContent = body; pv.hidden = false; row.hidden = false;
+      mailA.href = 'mailto:deskbridgeglobal@gmail.com?subject=' + encodeURIComponent(subject) + '&body=' + encodeURIComponent(body);
+      out.textContent = 'We could not send this automatically. Copy your request or open your email app, and send it to deskbridgeglobal@gmail.com.';
+      btn.disabled = false; btn.textContent = 'Send my request';
+    }
+    var btn = document.getElementById('sendBtn');
+    btn.disabled = true; btn.textContent = 'Sending…'; out.textContent = '';
+    fetch('https://formsubmit.co/ajax/deskbridgeglobal@gmail.com', {
+      method: 'POST',
+      headers: {'Content-Type': 'application/json', 'Accept': 'application/json'},
+      body: JSON.stringify({ _subject: subject, _template: 'table', _replyto: em, name: v('q-name'), email: em, business: v('q-biz') || '-', country: v('q-country') || '-', service: v('q-svc'), work: v('q-work') })
+    }).then(function(r){ return r.json(); }).then(function(d){
+      if (d && (d.success === true || d.success === 'true')){
+        form.querySelectorAll('input, textarea').forEach(function(el){ if (el.id !== 'q-honey') el.value = ''; });
+        pv.hidden = true; row.hidden = true;
+        btn.disabled = false; btn.textContent = 'Send my request';
+        out.textContent = 'Thank you! Your request has been sent. We will reply to ' + em + ' within one working day.';
+      } else { fallback(); }
+    }).catch(fallback);
   });
   document.getElementById('copyReq').addEventListener('click', function(){
     var t = pv.textContent;
