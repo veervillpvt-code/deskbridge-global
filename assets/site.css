@@ -211,3 +211,12 @@ footer a:hover{color:var(--fg)}
 /* the page title already says it – hide the repeated heading of the first section */
 .page-hero + section .section-head { display: none; }
 .page-hero + section { padding-top: 40px; }
+
+footer .wrap{grid-template-columns:minmax(0,1.4fr) repeat(4,minmax(0,1fr))}
+footer .legal-line{display:block;margin-top:28px;padding-top:18px;border-top:1px solid var(--line);font-size:13px}
+@media (max-width:760px){footer .wrap{grid-template-columns:1fr 1fr}}
+.legal{max-width:820px}
+.legal h2{font-size:24px;margin-top:34px}
+.legal p,.legal li{color:var(--muted);margin-top:10px}
+.legal ul{padding-left:20px}
+.legal .updated{font-size:14px;color:var(--muted)}
