@@ -1,0 +1,107 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Contact & free trial – DeskBridge Global</title>
+<meta name="description" content="Start your free 5-hour trial. Tell us the work you want to hand over – we reply within one working day.">
+<meta property="og:title" content="Contact & free trial – DeskBridge Global">
+<meta property="og:description" content="Start your free 5-hour trial. Tell us the work you want to hand over – we reply within one working day.">
+<meta property="og:site_name" content="DeskBridge Global">
+<link rel="icon" href="/assets/favicon.svg" type="image/svg+xml">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,500;12..96,700;12..96,800&family=Figtree:wght@400;500;600;700&family=JetBrains+Mono:wght@500;600&display=swap">
+<link rel="stylesheet" href="/assets/site.css">
+<style>[hidden]{display:none!important}</style>
+</head>
+<body>
+<header>
+  <div class="wrap nav">
+    <a class="brand" href="/" aria-label="DeskBridge Global home">
+      <svg width="34" height="34" viewBox="0 0 34 34" aria-hidden="true">
+        <rect x="1" y="20" width="9" height="12" rx="2" fill="var(--teal)"></rect>
+        <rect x="24" y="20" width="9" height="12" rx="2" fill="var(--teal)"></rect>
+        <path d="M5.5 20 C 9 6, 25 6, 28.5 20" fill="none" stroke="var(--marigold)" stroke-width="3" stroke-linecap="round"></path>
+      </svg>
+      <b>DeskBridge</b><span>Global</span>
+    </a>
+    <button class="menu-btn" type="button" aria-expanded="false" aria-controls="site-links">Menu</button>
+    <nav class="links" id="site-links" aria-label="Pages">
+      <a href="/services">Services</a>
+      <a href="/pricing">Pricing</a>
+      <a href="/how-it-works">How it works</a>
+      <a href="/contact" aria-current="page">Contact</a>
+    </nav>
+    <a class="btn btn-primary" href="/contact">Get a free trial</a>
+  </div>
+</header>
+
+<main id="top">
+  <section class="page-hero">
+    <div class="wrap">
+      <p class="crumbs"><a href="/">Home</a> › Contact</p>
+      <p class="eyebrow" style="margin-top:14px">Free trial</p>
+      <h1>Tell us the work. We reply within one working day.</h1>
+      <p class="lede">No payment details needed. We sign an NDA before you share any data.</p>
+    </div>
+  </section>
+
+  <section id="contact" aria-labelledby="contact-h">
+    <div class="wrap">
+      <div class="contact">
+        <div>
+          <h2 id="contact-h">Start your free 5-hour trial</h2>
+          <p>Tell us about the work you want to hand over. We reply within one working day.</p>
+          <div class="mailline">
+            <span style="font-size:13px;font-weight:700;letter-spacing:.06em;text-transform:uppercase;opacity:.85">Email us</span>
+            <span class="addr" id="mail">deskbridgeglobal@gmail.com</span>
+          </div>
+        </div>
+        <form class="quote" id="quote" novalidate>
+          <div class="two">
+            <div><label for="q-name">Your name</label><input id="q-name" autocomplete="name" placeholder="Jane Smith"></div>
+            <div><label for="q-biz">Business</label><input id="q-biz" autocomplete="organization" placeholder="Smith Home Goods"></div>
+          </div>
+          <div class="two">
+            <div><label for="q-email">Email</label><input id="q-email" type="email" autocomplete="email" placeholder="jane@smithhomegoods.com"></div>
+            <div><label for="q-country">Country</label><input id="q-country" autocomplete="country-name" placeholder="United Kingdom"></div>
+          </div>
+          <div>
+            <div><label for="q-svc">Main service</label>
+              <select id="q-svc">
+                <option>Data entry &amp; processing</option><option>Bookkeeping &amp; accounts</option><option>Invoices &amp; payroll prep</option><option>Customer support</option><option>E-commerce operations</option><option>Virtual assistant</option><option>Social media &amp; content</option><option>Lead generation</option><option>Website &amp; listing updates</option><option>Not sure yet</option>
+              </select>
+            </div>
+          </div>
+          <div><label for="q-work">What work do you want to hand over?</label><textarea id="q-work" placeholder="About 300 supplier invoices a month into Xero, plus replies to customer emails."></textarea></div>
+          <input type="text" id="q-honey" tabindex="-1" autocomplete="off" aria-hidden="true" style="position:absolute;left:-9999px;width:1px;height:1px;opacity:0">
+          <button class="btn btn-primary" type="submit" id="sendBtn">Send my request</button>
+          <span class="status" id="status" aria-live="polite"></span>
+          <div class="preview" id="preview" hidden></div>
+          <div class="two" id="sendRow" hidden>
+            <button class="btn btn-ghost" type="button" id="copyReq">Copy request</button>
+            <a class="btn btn-ghost" id="mailReq" href="mailto:deskbridgeglobal@gmail.com">Open email app</a>
+          </div>
+        </form>
+      </div>
+    </div>
+  </section>
+</main>
+
+<footer>
+  <div class="wrap">
+    <div>
+      <b style="color:var(--fg);font-family:var(--display);font-size:18px">DeskBridge Global</b>
+      <p style="margin-top:8px">Remote back office team for businesses worldwide.<br>A service of Veervill Private Limited.<br>Thanjavur, Tamil Nadu, India.</p>
+      <p style="margin-top:8px" class="mono">deskbridgeglobal@gmail.com</p>
+    </div>
+    <div><h4>Services</h4><a href="/services">Data entry</a><a href="/services">Bookkeeping</a><a href="/services">Customer support</a><a href="/services">E-commerce</a></div>
+    <div><h4>Company</h4><a href="/how-it-works">How it works</a><a href="/services#industries">Industries</a><a href="/how-it-works#faq">FAQ</a></div>
+    <div><h4>Get started</h4><a href="/pricing">Pricing</a><a href="/contact">Free trial</a></div>
+  </div>
+</footer>
+
+<script src="/assets/site.js"></script>
+</body>
+</html>
